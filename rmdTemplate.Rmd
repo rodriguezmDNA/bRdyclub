@@ -1,0 +1,99 @@
+---
+title: "Rmarkdown template"
+author: "your name here"
+output:
+  html_document:
+    df_print: paged
+---
+
+[tl;dr click here](https://rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf)
+
+# Main Title
+
+Rmarkdown offers a way to combine plain text and results from your analysis in a powerful way. The output can be a PDF, static webpage (HTML document) or a Word doc. There are many ways to customize it but here I'll just present the very basics.
+
+One of the features of markdown is that you can format plain text easily without the need of knowing more complex (albeit more powerful) markup languages.
+
+Rmarkdown interprets each line as simple text *unless* it encounters a chunk of code. A chunk of code is surrounded by 
+
+```{r eval=F}
+#Your R code goes here
+library(tidyverse)
+plot(cars)
+```
+
+Next, is how to format your text. Markdown is quite elegant in the way it handles the formatting. Surround text between two underscores `_` to make it _italics_ or between double asterisks `**` to **bold** . You can even _**combine**_ both. To make a list just add an asterisk to the start of each line:
+
+* `**bold**` = **bold**  
+* `_italics_` = _italics_  
+* `_**both**_` = _both_  
+
+Also works for numbered lists
+
+1. Uno
+2. Dos
+3. Tres
+4. [Catorce](https://www.youtube.com/watch?v=98W9QuMq-2k)
+
+(^ you can also include links to websites)
+
+
+
+Add three dashes (`---`) to print lines to separate your text:
+
+--- 
+ 
+To write a titles just add `#` at the start of the line:
+
+# Titlest of all titles that ever titled  
+## Such chapter, so title, much impressed 
+### Sir Title Titlebaum, Third of its Rank
+### Maybe important
+#### Srsly?
+##### I'd argue against this
+
+To convert your Rmarkdown file to a nicely HTML or PDF, click the **Knit** button below the script's tab (top border in RStudio). All your text and R code will be run together to produce the output.
+
+All of your Rcode has to be exactly the same as in a normal R script. You need ot load the libraries
+
+```{r message=F,warning=F}
+library(tidyverse)
+```
+
+Check the contents of data:
+
+```{r}
+head(mpg)
+```
+
+You can also add plots:
+
+```{r}
+ggplot(mpg,aes(x=cty,y=displ,color=drv)) +
+  geom_point() + 
+  geom_smooth() +
+  theme_light()
+```
+
+You can have finer control of the behaviour of the chunks. Adding parameters to the `{r}` portion you can. For example, adding `echo=F` and `message=F` won't output the code that produced the plot or any messages (like the ones `geom_smooth()` produces):
+
+```{r echo=F, }
+ggplot(mpg,aes(x=cty,y=displ,color=drv)) +
+  geom_point() + 
+  geom_smooth(method="lm",se=F) +
+  theme_light()
+```
+
+### More 
+
+This barely scratches the surface of what you can do with Rmarkdown but it's enough to make reproducible code.
+
+To know more about all the fancy stuff that RMD (that's how the cool kids call it) is capable of doing check out [The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
+
+And more on markdown syntax on how to format your text:
+
+* [Markdown syntax](https://www.markdownguide.org/basic-syntax)
+* [Original markdown project](https://daringfireball.net/projects/markdown/)
+
+
+
